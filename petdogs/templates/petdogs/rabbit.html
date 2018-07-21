@@ -1,0 +1,166 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'petdogs/rabbitcss.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'Boot/css/bootstrap.min.css' %}">
+    <script type="text/javascript" src="{% static 'Boot/js/jquery.js' %}"></script>
+    <script type="text/javascript" src="{% static 'Boot/js/npm.js' %}"></script>
+    <script type="text/javascript" src="{% static 'Boot/js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'Boot/js/script.js' %}"></script>
+
+    <style>
+
+
+         input[type="text"] {
+            height: 35px;
+            width: 575px;
+        }
+
+        input[type="number"] {
+            height: 35px;
+            width: 600px;
+        }
+
+    </style>
+</head>
+<body>
+
+
+  <nav class="nav navbar-inverse">
+    <div class="fluid-container">
+      <div class="navbar-header">
+        <a href="#" class="navbar-brand">PET REGISTRATION</a>
+      </div>
+    <div>
+      <ul class="nav navbar-nav">
+        <li><a href="/petdogs/">Home</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dog <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/petdogs/insertdog/">Insert Record </a></li>
+            <li><a href="/petdogs/tabledog/">Update/Delete Record </a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Cat <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/petdogs/insertcat/">Insert Record </a></li>
+            <li><a href="/petdogs/tablecat/">Update/Delete Record </a></li>
+          </ul>
+        </li>
+        <li class="dropdown active">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Rabbit <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/petdogs/insertrabbit/">Insert Record </a></li>
+            <li><a href="/petdogs/tablerabbit/">Update/Delete Record </a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+  </nav>
+
+
+    <div>
+        {% if pet %}
+            <form  method="post" action="/petdogs/updaterabbit{{ pet.id }}/">
+                {% csrf_token %}
+                <div id="work11">
+                    <p align="center" style="font-size:30px;"><strong> PET DETAILS</strong></p>
+                    <p>
+                        <label>Pet Name</label>
+                        <input type="text" placeholder="enter pet's name here" name="petname" value="{{ pet.pet_name }}">
+                    </p>
+                    <p>
+                        <label>Gender</label>
+                        <select name="gender" id="change" style="width:595px;padding:6px;">
+                            {% if pet.gender %}
+                                <option value="{{ True }}" selected="selected">Male </option>
+                                <option value="{{ False }}">Female </option>
+                            {% else %}
+                                <option value="{{ True }}">Male </option>
+                                <option value="{{ False }}" selected="selected">Female </option>
+                            {% endif %}
+                        </select>
+                    </p>
+                    <p>
+                        <label>Breed</label>
+                        <select name="breed" style="width:605px;padding:6px;" >
+                            {% for br in breed_info %}
+                                {% if  pet.pet_breed == br %}
+                                    <option value={{ br.id }} }} selected="selected">{{ br.breed}}</option>
+                                {% else %}
+                                    <option value={{ br.id }} }}>{{ br.breed}}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </p>
+                    <p>
+                        <label>Height</label>
+                        <input type="number" name="height" placeholder="enter height" value="{{ pet.height }}">
+                    </p>
+                    <p>
+                        <label>Weight</label>
+                        <input type="number" name="weight" placeholder="enter weight" value="{{ pet.weight }}">
+                    </p>
+                </div>
+                <p align="center">
+                    <button id="but" type="submit" class="btn btn-primary btn-block">SUBMIT</button>
+                   <a class="btn btn-primary btn-block" href="/petdogs/deleatedonerabbit{{ pet.id }}/" role="button">DELETE</a>
+                </p>
+            </form>
+        {% else %}
+            <form   method="post" action="/petdogs/insertdonerabbit/">
+                {% csrf_token %}
+                <div id="work11">
+                    <p align="center" style="font-size:30px;"><strong> PET DETAILS</strong></p>
+                    <p>
+                        <label>Pet Name</label>
+                        <input type="text" placeholder="enter pet's name here" name="petname">
+                        {% if petname  %}
+                           <h4 style="color:red">Pet Name is mandatory!!</h4>
+                        {% endif %}
+                    </p>
+                    <p>
+                        <label>Gender</label>
+                        <select name="gender" style="width:595px;padding:6px;">
+                            <option value="{{ True }}">Male</option>
+                            <option value="{{ False }}">Female</option>
+                        </select>
+                    </p>
+                    <p>
+                        <label>Breed</label>
+                        <select name="breed" style="width:605px;padding:6px;">
+                            {% for br in breed_info %}
+                                <option value={{ br.id }} }}>{{ br.breed}}</option>
+                            {% endfor %}
+                        </select>
+                    </p>
+                    <p>
+                        <label>Height</label>
+                        <input type="number" name="height" placeholder="enter height" >
+                        {% if petheight %}
+                           <h4 style="color:red">Pet Height is mandatory!!</h4>
+                        {% endif %}
+                    </p>
+                    <p>
+                        <label>Weight</label>
+                        <input type="number" name="weight" placeholder="enter weight" >
+                        {% if petweight %}
+                           <h4 style="color:red">Pet Weight is mandatory!!</h4>
+                        {% endif %}
+                    </p>
+                </div>
+                <p align="center">
+                    <button id="but" type="submit" class="btn btn-primary btn-block">SUBMIT</button>
+                </p>
+            </form>
+        {% endif %}
+    </div>
+    <hr/>
+</body>
+<footer align="bottom">
+    website specifically for registration of pet which will include entering pet's details
+</footer>
+</html>

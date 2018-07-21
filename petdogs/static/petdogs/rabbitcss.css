@@ -1,0 +1,55 @@
+body {
+    background-image: url("images/pet14.jpg");
+	background-size: cover;
+    background-repeat: no-repeat;
+}
+#but{
+	font-size: 25px;
+	 background-color: #a2546d;
+}
+#but1{
+	font-size: 25px;
+	 background-color: #a2546d;
+}
+form{
+	 font-size:20px;
+}
+#change{
+	margin-left:5px;
+	width: 30%;
+	padding: 5px 5px;
+    margin: 5px 0;
+    box-sizing: border-box;
+}
+#work11{
+	padding: 10px 10px 10px 10px;
+}
+#work22{
+	padding: 10px 10px 10px 10px;
+}
+footer{
+	color: navy;
+	font-size: 20px;
+	font-variant: bold;
+}
+label{
+	font-size: 20px;
+}
+input[type=text] {
+    width: 30%;
+    padding: 5px 5px;
+    margin: 5px 0;
+    box-sizing: border-box;
+}
+input[type=number] {
+    width: 30%;
+    padding: 5px 5px;
+    margin: 5px 0;
+    box-sizing: border-box;
+}
+input[type=search]{
+	width: 40%;
+	box-sizing: border-box;
+	 padding: 5px 5px;
+    margin: 5px 0;
+}
