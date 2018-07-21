@@ -1,0 +1,109 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'petdogs/dogcss.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'Boot/css/bootstrap.min.css' %}">
+    <script type="text/javascript" src="{% static 'Boot/js/jquery.js' %}"></script>
+    <script type="text/javascript" src="{% static 'Boot/js/npm.js' %}"></script>
+    <script type="text/javascript" src="{% static 'Boot/js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'Boot/js/script.js' %}"></script>
+
+    <style>
+        input[type="text"] {
+            height: 45px;
+            width: 735px;
+        }
+
+        input[type="number"] {
+            height: 45px;
+            width: 750px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+
+<nav class="nav navbar-inverse">
+	<div class="fluid-container">
+		<div class="navbar-header">
+			<a href="#" class="navbar-brand">PET REGISTRATION</a>
+		</div>
+	<div>
+		<ul class="nav navbar-nav">
+			<li><a href="/petdogs/">Home</a></li>
+      <li class="dropdown active">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dog <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="/petdogs/insertdog/">Insert Record </a></li>
+          <li><a href="/petdogs/tabledog/">Update/Delete Record </a></li>
+        </ul>
+      </li>
+			<li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Cat <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="/petdogs/insertcat/">Insert Record </a></li>
+          <li><a href="/petdogs/tablecat/">Update/Delete Record </a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Rabbit <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="/petdogs/insertrabbit/">Insert Record </a></li>
+          <li><a href="/petdogs/tablerabbit/">Update/Delete Record </a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</nav>
+
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        <div class="panel panel-info" style="background:#04080eb5 ; color: #f44336">
+            <div>
+                <h2 style="text-align: center"><strong>Dog Info</strong></h2>
+            </div>
+            <hr style="height:15px;">
+            {% for breed in breed_info %}
+                <h2 style="text-align: center"><b>{{ breed.breed }}</b></h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th><h3>Name</h3></th>
+                        <th><h3>Height</h3></th>
+                        <th><h3>Weight</h3></th>
+                        <th><h3>Sex</h3></th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for pet in breed.doginfo_set.all %}
+                <tr>
+                    {% if pet.gender %}
+                        <td><a href="/petdogs/dog{{ pet.id }}/" style="color: black;"> <h4>{{ pet.pet_name}}</h4></a></td>
+                        <td><h4> {{ pet.height }}</h4></td>
+                        <td> <h4>{{ pet.weight }}</h4></td>
+                        <td><h4>  Male </h4></td>
+                    {% else %}
+
+                        <td><a href="/petdogs/dog{{ pet.id }}/" style="color: black;"><h4>{{ pet.pet_name}}</h4></a></td>
+                        <td><h4>{{ pet.height }}</h4></td>
+                        <td> <h4>{{ pet.weight }}</h4></td>
+                        <td><h4>Female</h4></td>
+
+                    {% endif %}
+                </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
